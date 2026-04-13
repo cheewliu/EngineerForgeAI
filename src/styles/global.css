@@ -71,10 +71,10 @@
 [data-theme="light"] .logo-text__engineer { color: rgba(0,0,0,0.5); }
 [data-theme="light"] .site-header { border-bottom-color: var(--border); }
 [data-theme="light"] .home-banner__sub { color: rgba(255,255,255,0.8); }
-/* Keep code blocks dark in light mode — Dracula theme stays dark always */
-[data-theme="light"] .post-content pre { background: #282a36 !important; border-color: #44475a; }
-[data-theme="light"] .post-content code { background: rgba(68,71,90,0.4); color: var(--accent); }
-[data-theme="light"] .copy-btn { background: #383a59; color: #f8f8f2; border-color: #44475a; }
+/* Keep code blocks in VS dark-plus style always, even in light mode */
+[data-theme="light"] .post-content pre { background: #1e1e1e !important; border-color: #3c3c3c; }
+[data-theme="light"] .post-content code { background: rgba(30,30,30,0.12); color: #569cd6; }
+[data-theme="light"] .copy-btn { background: #2d2d2d; color: #cccccc; border-color: #3c3c3c; }
 [data-theme="light"] .copy-btn:hover, [data-theme="light"] .copy-btn.copied { background: var(--accent); color: #fff; }
 
 /* ─── Animations ────────────────────────────────────────────────────── */
@@ -766,12 +766,12 @@ body, .site-header, .site-footer, .post-card, .mag-featured, .post-nav__item {
 .code-block-wrapper { position: relative; margin: 2rem 0; }
 
 .post-content pre {
-  /* Shiki (Dracula) inlines its own background — we just ensure layout */
-  background: #282a36;
+  /* Shiki (dark-plus / VS Code) inlines its own colours — we control layout */
+  background: #1e1e1e;
   border-radius: var(--radius); padding: 1.5rem 1.75rem;
   overflow-x: auto; margin: 0;
   font-size: 0.875rem; line-height: 1.7;
-  border: 1px solid #44475a;
+  border: 1px solid #3c3c3c;
 }
 .post-content pre code { background: none; border: none; padding: 0; font-size: inherit; color: inherit; }
 
@@ -779,8 +779,8 @@ body, .site-header, .site-footer, .post-card, .mag-featured, .post-nav__item {
   position: absolute; top: 0.75rem; right: 0.75rem;
   font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
   padding: 4px 10px; border-radius: 6px;
-  border: 1px solid #44475a;
-  background: #383a59; color: #f8f8f2;
+  border: 1px solid #3c3c3c;
+  background: #2d2d2d; color: #cccccc;
   cursor: pointer; opacity: 0; transition: all 0.15s;
 }
 .code-block-wrapper:hover .copy-btn, .copy-btn:focus-visible { opacity: 1; }
