@@ -1,0 +1,134 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPathsOptions } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getTagColor } from '../utils/tagColor';
+import { readingTime } from '../utils/readingTime';
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const isDev = import.meta.env.DEV;
+  const all = await getCollection('posts', ({ data }) => isDev || !data.draft);
+  const sorted = all.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  return paginate(sorted, { pageSize: 9 });
+}
+
+const { page } = Astro.props;
+const isFirst = page.currentPage === 1;
+const isLast = page.currentPage === page.lastPage;
+
+// Page 1: featured (left) + 4 side cards (right 2×2) + rest in grid
+// Page 2+: all cards in grid
+const featured   = isFirst ? page.data[0] : null;
+const sideItems  = isFirst ? page.data.slice(1, 5) : [];
+const gridPosts  = isFirst ? page.data.slice(5) : page.data;
+
+const featuredTag   = featured ? (featured.data.tags[0] ?? 'meta') : 'meta';
+const featuredColor = getTagColor(featuredTag);
+const featuredMins  = featured?.body ? readingTime(featured.body) : null;
+const featuredDate  = featured?.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+function pageNums(cur: number, total: number): (number | '…')[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const out: (number | '…')[] = [1];
+  if (cur > 3) out.push('…');
+  for (let i = Math.max(2, cur - 1); i <= Math.min(total - 1, cur + 1); i++) out.push(i);
+  if (cur < total - 2) out.push('…');
+  out.push(total);
+  return out;
+}
+const nums = pageNums(page.currentPage, page.lastPage);
+---
+
+<BaseLayout title="EngineerForge AI" description="Where Engineers Build With AI">
+
+  {isFirst && (
+    <div class="home-banner">
+      <img class="home-banner__img" src="/images/test.jpg" alt="" aria-hidden="true" />
+      <div class="home-banner__overlay"></div>
+      <div class="home-banner__body">
+        <h1 class="home-banner__title"><span class="logo-text__engineer">Engineer</span><span class="logo-text__forge">Forge</span> <span class="logo-text__ai--lg">AI</span></h1>
+        <p class="home-banner__sub">Where Engineers Build With AI</p>
+      </div>
+    </div>
+  )}
+
+  {/* Magazine layout: big left + 2×2 right */}
+  {isFirst && featured && (
+    <div class="magazine-grid">
+
+      {/* ── Left: big featured post ── */}
+      <a href={`/posts/${featured.id}`} class="mag-featured reveal">
+        {featured.data.cover
+          ? <img class="mag-featured__img" src={featured.data.cover} alt={featured.data.title} />
+          : <div class="mag-featured__no-img"></div>
+        }
+        <div class="mag-featured__overlay"></div>
+        <div class="mag-featured__body">
+          <span class="mag-featured__tag" style={`color:${featuredColor.dot}`}>
+            <span class="dot" style={`background:${featuredColor.dot}`}></span>
+            {featuredTag}
+          </span>
+          <h2 class="mag-featured__title">{featured.data.title}</h2>
+          <p class="mag-featured__desc">{featured.data.description}</p>
+          <div class="mag-featured__meta">
+            <span>{featuredDate}</span>
+            {featuredMins && <><span>·</span><span>{featuredMins} min read</span></>}
+          </div>
+        </div>
+      </a>
+
+      {/* ── Right: 2×2 side cards ── */}
+      <div class="mag-side reveal-stagger">
+        {sideItems.map(post => (
+          <PostCard
+            title={post.data.title}
+            slug={post.id}
+            date={post.data.date}
+            description={post.data.description}
+            tags={post.data.tags}
+            cover={post.data.cover}
+            body={post.body}
+            draft={post.data.draft}
+          />
+        ))}
+      </div>
+    </div>
+  )}
+
+  {/* Remaining posts grid */}
+  {gridPosts.length > 0 && (
+    <>
+      <p class="section-label">{isFirst ? 'More posts' : `Page ${page.currentPage}`}</p>
+      <div class="post-grid reveal-stagger">
+        {gridPosts.map(post => (
+          <PostCard
+            title={post.data.title}
+            slug={post.id}
+            date={post.data.date}
+            description={post.data.description}
+            tags={post.data.tags}
+            cover={post.data.cover}
+            body={post.body}
+            draft={post.data.draft}
+          />
+        ))}
+      </div>
+    </>
+  )}
+
+  {page.lastPage > 1 && (
+    <nav class="pagination" aria-label="Page navigation">
+      <a href={isFirst ? undefined : page.url.prev} class="pagination__btn" aria-disabled={isFirst ? 'true' : undefined}>← Prev</a>
+      <div class="pagination__pages">
+        {nums.map(n =>
+          n === '…'
+            ? <span class="pagination__ellipsis">…</span>
+            : <a href={n === 1 ? '/' : `/${n}`} class="pagination__btn" aria-current={n === page.currentPage ? 'page' : undefined}>{n}</a>
+        )}
+      </div>
+      <a href={isLast ? undefined : page.url.next} class="pagination__btn" aria-disabled={isLast ? 'true' : undefined}>Next →</a>
+    </nav>
+  )}
+
+</BaseLayout>

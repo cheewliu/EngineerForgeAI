@@ -1,0 +1,102 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TagList from '../components/TagList.astro';
+import { readingTime } from '../utils/readingTime';
+import { getTagColor } from '../utils/tagColor';
+
+interface Props {
+  title: string;
+  date: Date;
+  description: string;
+  tags: string[];
+  cover?: string;
+  body?: string;
+}
+
+const { title, date, description, tags, cover, body } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+const mins = body ? readingTime(body) : null;
+const firstTag = tags[0] ?? 'meta';
+const tagColor = getTagColor(firstTag);
+---
+<BaseLayout title={title} description={description} cover={cover} type="article" publishedDate={date} tags={tags}>
+  <!-- Reading progress bar -->
+  <div class="reading-progress" id="reading-progress" role="progressbar" aria-label="Reading progress"></div>
+
+  <article class="post-article">
+    <header class="post-header">
+      <a href="/" class="post-header__back">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+          <path d="M10 3L5 8l5 5"/>
+        </svg>
+        All posts
+      </a>
+
+      <div class="post-header__category" style={`color:${tagColor.dot}`}>
+        <span class="post-card__category-dot" style={`background:${tagColor.dot}`}></span>
+        {firstTag}
+      </div>
+
+      <h1 class="post-header__title">{title}</h1>
+
+      <div class="post-header__meta">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+        {mins && <><span class="meta-sep">·</span><span>{mins} min read</span></>}
+      </div>
+
+      <TagList tags={tags} />
+    </header>
+
+    {cover && (
+      <div class="post-cover-wrap">
+        <img class="post-cover-img" src={cover} alt={title} width="1200" height="630" />
+      </div>
+    )}
+
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  // Reading progress
+  const bar = document.getElementById('reading-progress');
+  const article = document.querySelector('article');
+
+  if (bar && article) {
+    const update = () => {
+      const rect = article.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      const scrolled = Math.max(0, -rect.top);
+      bar.style.width = total > 0 ? `${Math.min(100, (scrolled / total) * 100)}%` : '100%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+  // Copy buttons
+  document.querySelectorAll('.post-content pre').forEach((pre) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'code-block-wrapper';
+    pre.parentNode!.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = 'copy';
+    btn.setAttribute('aria-label', 'Copy code');
+    wrapper.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      const text = pre.querySelector('code')?.innerText ?? (pre as HTMLElement).innerText;
+      await navigator.clipboard.writeText(text);
+      btn.textContent = 'copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  });
+</script>

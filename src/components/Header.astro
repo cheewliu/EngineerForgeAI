@@ -1,0 +1,42 @@
+---
+const path = Astro.url.pathname;
+
+const categories = [
+  { label: 'Claude', href: '/tags/claude' },
+  { label: 'Prompt Engineering', href: '/tags/prompt-engineering' },
+  { label: 'OpenTAP', href: '/tags/opentap' },
+  { label: 'C#', href: '/tags/csharp' },
+  { label: 'Token Optimization', href: '/tags/token-optimization' },
+  { label: 'Workflow', href: '/tags/workflow' },
+  { label: 'CI/CD', href: '/tags/ci-cd' },
+];
+---
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__logo">
+      <span class="logo-mark">EF</span>
+      <span class="logo-text"><span class="logo-text__engineer">Engineer</span><span class="logo-text__forge">Forge</span> <span class="logo-text__ai">AI</span></span>
+    </a>
+    <div class="site-header__right">
+      <nav aria-label="Main navigation">
+        <ul class="site-header__nav">
+          <li><a href="/" aria-current={path === '/' || /^\/\d/.test(path) ? 'page' : undefined}>Posts</a></li>
+          <li><a href="/tags" aria-current={path === '/tags' ? 'page' : undefined}>Topics</a></li>
+          <li><a href="/about" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <nav class="category-strip" aria-label="Topic navigation">
+    <div class="category-strip__inner">
+      {categories.map(c => (
+        <a
+          href={c.href}
+          class="category-strip__link"
+          aria-current={path === c.href ? 'page' : undefined}
+        >{c.label}</a>
+      ))}
+    </div>
+  </nav>
+</header>

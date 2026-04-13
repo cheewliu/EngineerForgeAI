@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="About" description="What EngineerForge AI is, who built it, and what to expect.">
+
+  <!-- Hero banner -->
+  <div class="about-hero">
+    <img class="about-hero__bg" src="/images/test.jpg" alt="" aria-hidden="true" />
+    <div class="about-hero__overlay"></div>
+    <div class="about-hero__inner">
+      <div class="about-hero__badge">est. 2024</div>
+      <h1 class="about-hero__title"><span class="logo-text__engineer">Engineer</span><span class="logo-text__forge">Forge</span> <span class="logo-text__ai--lg">AI</span></h1>
+      <p class="about-hero__tagline">Where Engineers Build With AI</p>
+      <p class="about-hero__sub">
+        Real AI experiments from a test automation engineer who got tired of
+        reading blog posts that never show the part where it breaks.
+      </p>
+    </div>
+  </div>
+
+  <!-- Manifesto cards -->
+  <div class="about-manifesto reveal-stagger">
+    <div class="about-manifesto__card about-manifesto__card--accent reveal">
+      <span class="about-manifesto__icon">⚡</span>
+      <h3>Production or it didn't happen</h3>
+      <p>Every technique here has been run against real code, real APIs, and real cost constraints. No demos. No vibes.</p>
+    </div>
+    <div class="about-manifesto__card reveal">
+      <span class="about-manifesto__icon">💸</span>
+      <h3>Tokens cost money</h3>
+      <p>We track what we spend, optimize what we can, and publish the numbers — even when they're embarrassing.</p>
+    </div>
+    <div class="about-manifesto__card reveal">
+      <span class="about-manifesto__icon">🔥</span>
+      <h3>Failures ship too</h3>
+      <p>If a prompt blew up, a model hallucinated, or an approach wasted a week — that's a post. Failure has better signal.</p>
+    </div>
+  </div>
+
+  <!-- What's covered -->
+  <div class="about-section reveal">
+    <h2 class="about-section__title">What we cover</h2>
+    <div class="about-topics">
+      <div class="about-topic">
+        <span class="about-topic__tag" style="background:rgba(139,92,246,0.15);color:#a78bfa">#claude</span>
+        <p>Prompt engineering, Claude Code, Claude CLI — what actually works in CI pipelines and production codebases.</p>
+      </div>
+      <div class="about-topic">
+        <span class="about-topic__tag" style="background:rgba(236,72,153,0.15);color:#f472b6">#csharp</span>
+        <p>AI-assisted C# workflows, code generation patterns, and getting LLMs to respect your type system.</p>
+      </div>
+      <div class="about-topic">
+        <span class="about-topic__tag" style="background:rgba(6,182,212,0.15);color:#22d3ee">#opentap</span>
+        <p>Test automation with OpenTAP and PTEM — using AI to generate, validate, and debug test steps at scale.</p>
+      </div>
+      <div class="about-topic">
+        <span class="about-topic__tag" style="background:rgba(251,146,60,0.15);color:#fb923c">#token-optimization</span>
+        <p>Cutting API costs without cutting quality. Context window tricks, prompt compression, caching strategies.</p>
+      </div>
+      <div class="about-topic">
+        <span class="about-topic__tag" style="background:rgba(34,211,238,0.15);color:#22d3ee">#ci-cd</span>
+        <p>AI review gates, automated test generation, LLM-powered pipelines that ship faster and break less.</p>
+      </div>
+      <div class="about-topic">
+        <span class="about-topic__tag" style="background:rgba(74,222,128,0.15);color:#4ade80">#workflow</span>
+        <p>Day-to-day engineering with AI — the habits, tools, and shortcuts that have stuck after months of use.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Author -->
+  <div class="about-author reveal">
+    <div class="about-author__avatar">
+      <span>🧑‍💻</span>
+    </div>
+    <div class="about-author__bio">
+      <h2>Who's driving</h2>
+      <p>
+        A test automation engineer with a thing for deterministic output and a low tolerance for AI hype.
+        By day: OpenTAP, C#, CI/CD. By night: figuring out how far you can push a context window before
+        it starts lying to you.
+      </p>
+      <p>
+        EngineerForge AI started as a personal notebook. It became a blog when the notes got too useful to keep private.
+      </p>
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+/* ── About Hero ──────────────────────────────────────────────────────── */
+.about-hero {
+  position: relative; overflow: hidden;
+  margin: -2rem -3rem 0;
+  padding: 6rem 3rem 4.5rem;
+}
+
+.about-hero__bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.3;
+}
+
+.about-hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(9,9,11,0.95) 0%,
+    rgba(9,9,11,0.75) 50%,
+    rgba(9,9,11,0.35) 100%
+  );
+}
+
+.about-hero__inner { position: relative; z-index: 1; max-width: 640px; }
+
+.about-hero__badge {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid rgba(139,92,246,0.4);
+  padding: 3px 12px; border-radius: 999px; margin-bottom: 1.5rem;
+}
+
+.about-hero__title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900; letter-spacing: -0.06em; line-height: 1;
+  background: var(--gradient-text);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.75rem;
+}
+
+.about-hero__tagline {
+  font-size: 1.05rem; font-weight: 600; color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.about-hero__sub {
+  font-size: 1rem; color: var(--text-2); line-height: 1.75;
+}
+
+/* ── Manifesto cards ─────────────────────────────────────────────────── */
+.about-manifesto {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+  margin: 3rem 0;
+}
+
+.about-manifesto__card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.75rem;
+  transition: all 0.25s var(--ease);
+}
+.about-manifesto__card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-glow); transform: translateY(-2px); }
+.about-manifesto__card--accent { border-color: rgba(139,92,246,0.35); }
+
+.about-manifesto__icon { font-size: 1.75rem; display: block; margin-bottom: 0.85rem; }
+
+.about-manifesto__card h3 {
+  font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text);
+}
+.about-manifesto__card p { font-size: 0.85rem; color: var(--text-3); line-height: 1.65; }
+
+/* ── About section ───────────────────────────────────────────────────── */
+.about-section { margin: 3.5rem 0; }
+
+.about-section__title {
+  font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em;
+  margin-bottom: 1.75rem;
+}
+
+.about-topics {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
+}
+
+.about-topic {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+  transition: all 0.25s var(--ease);
+}
+.about-topic:hover { border-color: var(--border-hover); box-shadow: var(--shadow-glow); }
+
+.about-topic__tag {
+  display: inline-block; font-size: 0.75rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 999px; margin-bottom: 0.75rem;
+}
+.about-topic p { font-size: 0.88rem; color: var(--text-3); line-height: 1.65; }
+
+/* ── Author ──────────────────────────────────────────────────────────── */
+.about-author {
+  display: flex; gap: 2rem; align-items: flex-start;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2.25rem; margin: 3.5rem 0;
+  transition: border-color 0.25s;
+}
+.about-author:hover { border-color: var(--border-hover); }
+
+.about-author__avatar {
+  width: 72px; height: 72px; flex-shrink: 0;
+  background: var(--gradient-subtle);
+  border: 2px solid rgba(139,92,246,0.3);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+}
+
+.about-author__bio h2 {
+  font-size: 1.15rem; font-weight: 800; margin-bottom: 0.85rem;
+}
+.about-author__bio p { font-size: 0.92rem; color: var(--text-2); line-height: 1.75; margin-bottom: 0.75rem; }
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .about-manifesto { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .about-hero { margin: -1.5rem -1.25rem 0; padding: 3.5rem 1.25rem 3rem; }
+  .about-manifesto { grid-template-columns: 1fr; }
+  .about-topics { grid-template-columns: 1fr; }
+  .about-author { flex-direction: column; gap: 1.25rem; }
+}
+@media (max-width: 480px) {
+  .about-hero { margin: -1.25rem -1rem 0; padding: 2.5rem 1rem 2rem; }
+}
+</style>

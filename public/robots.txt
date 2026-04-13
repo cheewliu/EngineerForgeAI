@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://applied-claude-lab.vercel.app/sitemap-index.xml

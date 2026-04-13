@@ -1,0 +1,36 @@
+---
+import { getTagColor, getCoverGradient } from '../utils/tagColor';
+import { readingTime } from '../utils/readingTime';
+
+interface Props {
+  title: string;
+  slug: string;
+  date: Date;
+  description: string;
+  tags: string[];
+  cover?: string;
+  body?: string;
+}
+const { title, slug, date, description, tags, cover, body } = Astro.props;
+
+const firstTag = tags[0] ?? 'meta';
+const tagColor = getTagColor(firstTag);
+const gradient = getCoverGradient(firstTag);
+const mins = body ? readingTime(body) : null;
+const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+<a href={`/posts/${slug}`} class="hero-post">
+  {cover
+    ? <img class="hero-post__img" src={cover} alt={title} loading="eager" width="780" height="420" />
+    : <div class="hero-post__no-img" style={`background:${gradient}`}></div>
+  }
+  <div class="hero-post__overlay"></div>
+  <div class="hero-post__body">
+    <span class="hero-post__category">{firstTag}</span>
+    <h2 class="hero-post__title">{title}</h2>
+    <div class="hero-post__meta">
+      <span>{dateStr}</span>
+      {mins && <><span class="hero-post__meta-dot">·</span><span>{mins} min read</span></>}
+    </div>
+  </div>
+</a>

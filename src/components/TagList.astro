@@ -1,0 +1,25 @@
+---
+import { getTagColor } from '../utils/tagColor';
+
+interface Props {
+  tags: string[];
+  linkable?: boolean;
+}
+const { tags, linkable = true } = Astro.props;
+---
+<ul class="tag-list">
+  {tags.map((tag) => {
+    const c = getTagColor(tag);
+    return linkable
+      ? <li>
+          <a
+            href={`/tags/${tag}`}
+            class="tag"
+            style={`background:${c.bg};color:${c.text};`}
+          >#{tag}</a>
+        </li>
+      : <li>
+          <span class="tag" style={`background:${c.bg};color:${c.text};`}>#{tag}</span>
+        </li>;
+  })}
+</ul>
