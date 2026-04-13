@@ -1,26 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="About" description="What EngineerForge AI is, who built it, and what to expect.">
+<BaseLayout title="About" description="Who's behind EngineerForge AI, what we cover, and why it exists.">
 
   <!-- Hero banner -->
   <div class="about-hero">
-    <img class="about-hero__bg" src="https://picsum.photos/seed/aboutforge/1600/600" alt="" aria-hidden="true" fetchpriority="high" decoding="async" />
+    <img class="about-hero__bg" src="/images/about-banner.png" alt="" aria-hidden="true" fetchpriority="high" decoding="async" />
     <div class="about-hero__overlay"></div>
     <div class="about-hero__inner">
-      <div class="about-hero__badge">est. 2024</div>
+      <div class="about-hero__badge">est. 2026</div>
       <h1 class="about-hero__title"><span class="logo-text__engineer">Engineer</span><span class="logo-text__forge">Forge</span> <span class="logo-text__ai--lg">AI</span></h1>
       <p class="about-hero__tagline">Where Engineers Build With AI</p>
       <p class="about-hero__sub">
-        Real AI experiments from a test automation engineer who got tired of
-        reading blog posts that never show the part where it breaks.
+        A software and hardware engineer who decided that reading AI blog posts wasn't enough —
+        so started running the experiments instead. Some worked. Some didn't. All of it ended up here.
       </p>
     </div>
   </div>
 
   <!-- Manifesto cards -->
   <div class="about-manifesto reveal-stagger">
-    <div class="about-manifesto__card about-manifesto__card--accent reveal">
+    <div class="about-manifesto__card reveal">
       <span class="about-manifesto__icon">⚡</span>
       <h3>Production or it didn't happen</h3>
       <p>Every technique here has been run against real code, real APIs, and real cost constraints. No demos. No vibes.</p>
@@ -46,12 +46,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p>Prompt engineering, Claude Code, Claude CLI — what actually works in CI pipelines and production codebases.</p>
       </div>
       <div class="about-topic">
-        <span class="about-topic__tag" style="background:rgba(236,72,153,0.15);color:#f472b6">#csharp</span>
-        <p>AI-assisted C# workflows, code generation patterns, and getting LLMs to respect your type system.</p>
+        <span class="about-topic__tag" style="background:rgba(236,72,153,0.15);color:#f472b6">#engineering</span>
+        <p>AI-assisted engineering workflows across SW and HW — code generation, automation, getting LLMs to stop making things up.</p>
       </div>
       <div class="about-topic">
         <span class="about-topic__tag" style="background:rgba(6,182,212,0.15);color:#22d3ee">#opentap</span>
-        <p>Test automation with OpenTAP and PTEM — using AI to generate, validate, and debug test steps at scale.</p>
+        <p>Test automation with OpenTAP — using AI to generate, validate, and debug test steps without losing your mind.</p>
       </div>
       <div class="about-topic">
         <span class="about-topic__tag" style="background:rgba(251,146,60,0.15);color:#fb923c">#token-optimization</span>
@@ -76,13 +76,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="about-author__bio">
       <h2>Who's driving</h2>
       <p>
-        A test automation engineer with a thing for deterministic output and a low tolerance for AI hype.
-        By day: OpenTAP, C#, CI/CD. By night: figuring out how far you can push a context window before
-        it starts lying to you.
+        A software and hardware engineer with a habit of asking "can AI do this?" — and then actually finding out.
       </p>
       <p>
-        EngineerForge AI started as a personal notebook. It became a blog when the notes got too useful to keep private.
+        I work across SW and HW engineering — systems, automation, integration. Over the past year I've been embedding AI
+        into real workflows: not as a gimmick, but as something the team actually uses daily. That means building AI solutions,
+        running experiments that sometimes blow up, and leading engineers through the "wait, this actually works?" moment.
       </p>
+      <p>
+        Outside of work I'm here — running the same experiments in public, writing up what I find, and being honest when
+        something doesn't work out the way I planned. Favourite tools right now: Claude, Codex, and OpenTAP.
+        Least favourite thing: AI blog posts with no actual prompts in them. (Hence this site.)
+      </p>
+      <p>
+        EngineerForge AI started as notes-to-self. It became a blog when the notes got too useful to keep in a Teams chat that nobody reads.
+      </p>
+      <a href="/posts/why-i-built-applied-claude-lab" class="about-author__link">Read why I started this →</a>
     </div>
   </div>
 
@@ -152,7 +161,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   transition: all 0.25s var(--ease);
 }
 .about-manifesto__card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-glow); transform: translateY(-2px); }
-.about-manifesto__card--accent { border-color: rgba(139,92,246,0.35); }
 
 .about-manifesto__icon { font-size: 1.75rem; display: block; margin-bottom: 0.85rem; }
 
@@ -207,6 +215,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   font-size: 1.15rem; font-weight: 800; margin-bottom: 0.85rem;
 }
 .about-author__bio p { font-size: 0.92rem; color: var(--text-2); line-height: 1.75; margin-bottom: 0.75rem; }
+
+.about-author__link {
+  display: inline-block; margin-top: 0.5rem;
+  font-size: 0.88rem; font-weight: 700;
+  color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid rgba(139,92,246,0.35);
+  padding-bottom: 1px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.about-author__link:hover { color: var(--accent-light, #c4b5fd); border-color: var(--accent); }
 
 /* ── Responsive ──────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
