@@ -54,7 +54,8 @@ Update it whenever preferences, conventions, or decisions change.
 ### Existing posts (newest first)
 | File | Title | Date |
 |------|-------|------|
-| `prompt-engineering-csharp.md` | Using .md Files to Standardise Your Team's AI Agent | 2026-04-13 |
+| `claude-code-built-website.md` | I Used Claude Code to Build This Entire Website. Here's the Honest Truth. | 2026-04-13 |
+| `prompt-engineering-csharp.md` | Using .md Files to Standardise Your Team's AI Agent | 2026-04-11 |
 | `why-i-am-building-duckgineer.md` | Why I Am Building Duckgineer | 2026-04-10 |
 
 ### Images used per post
