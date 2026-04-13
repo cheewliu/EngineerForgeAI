@@ -1,6 +1,6 @@
 ---
 title: "Using .md Files to Standardise Your Team's AI Agent"
-date: 2026-04-13
+date: 2026-04-11
 description: "Every engineer on the team has their own AI setup. Here's how one .md file gets them all behaving the same way — without cloning anyone's brain."
 tags: ["prompt-engineering", "workflow", "claude"]
 cover: "/images/hero-md-team-standard.png"
