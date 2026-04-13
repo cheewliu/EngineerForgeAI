@@ -8,7 +8,7 @@ export default defineConfig({
   adapter: vercel(),
   markdown: {
     shikiConfig: {
-      theme: 'github-dark',
+      theme: 'dracula',
       wrap: false,
     },
   },
