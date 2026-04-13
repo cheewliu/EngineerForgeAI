@@ -1,7 +1,7 @@
 ---
 title: "Using .md Files to Standardise Your Team's AI Agent"
 date: 2026-04-11
-description: "Every engineer on the team has their own AI setup. Here's how one .md file gets them all behaving the same way — without cloning anyone's brain."
+description: "Every engineer on the team has their own AI setup. Here's how one .md file gets them all behaving the same way, without cloning anyone's brain."
 tags: ["prompt-engineering", "workflow", "claude"]
 cover: "/images/hero-md-team-standard.png"
 draft: false
@@ -15,13 +15,13 @@ Sound familiar?
 
 ## What's a .md Memory File?
 
-Most AI tools today — Claude, Copilot, Cursor — support some form of persistent instruction file. A markdown file that the AI reads before doing anything. Think of it as a briefing document: "here's who we are, here's how we work, here's what we never do."
+Most AI tools today, Claude, Copilot, Cursor, support some form of persistent instruction file. A markdown file that the AI reads before doing anything. Think of it as a briefing document: "here's who we are, here's how we work, here's what we never do."
 
-For Claude, it's `CLAUDE.md` — drop it at the root of your repo and Claude reads it automatically at the start of every session.
+For Claude, it's `CLAUDE.md`. Drop it at the root of your repo and Claude reads it automatically at the start of every session.
 
-For GitHub Copilot, it's `.github/copilot-instructions.md` — [documented here](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions). Same idea. Load once, apply everywhere.
+For GitHub Copilot, it's `.github/copilot-instructions.md`, [documented here](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions). Same idea. Load once, apply everywhere.
 
-These files are just markdown. No plugins. No configuration panels. Just text. And that's exactly what makes them powerful — any engineer can read, edit, and version-control them.
+These files are just markdown. No plugins. No configuration panels. Just text. And that's exactly what makes them powerful. Any engineer can read, edit, and version-control them.
 
 ## The Team Problem (and the Fix)
 
@@ -33,7 +33,7 @@ Here's what happens without a standard .md file:
 
 Same tool. Wildly different output.
 
-With a shared `.md` file committed to the repo, everyone loads the same instructions. The AI still belongs to each engineer — their account, their agent, their conversation — but it now follows the same rules.
+With a shared `.md` file committed to the repo, everyone loads the same instructions. The AI still belongs to each engineer, their account, their agent, their conversation, but it now follows the same rules.
 
 > Same rules. Not the same person. (The AI is not HR. Probably.)
 
@@ -58,7 +58,7 @@ Here's roughly what ours looks like for the engineering team:
 ## Context
 - This is a test automation codebase
 - Test steps inherit from OpenTAP's TestStep base class
-- Keep output deterministic — no random IDs, no Guid.NewGuid() unless asked
+- Keep output deterministic, no random IDs, no Guid.NewGuid() unless asked
 ```
 
 Every engineer loads this. Claude reads it. Copilot reads it. Cursor reads it. Suddenly the whole team's AI is working from the same playbook.
@@ -67,7 +67,7 @@ Every engineer loads this. Claude reads it. Copilot reads it. Cursor reads it. S
 
 Copilot has first-class support for this via `.github/copilot-instructions.md`. Drop the file in that path, commit it, and Copilot picks it up automatically for anyone working in that repo.
 
-The format is the same — plain markdown. Rules, context, stack info, whatever you want the AI to know before it starts suggesting code.
+The format is the same, plain markdown. Rules, context, stack info, whatever you want the AI to know before it starts suggesting code.
 
 ```markdown
 # Copilot Instructions
@@ -84,6 +84,6 @@ One file. Every engineer's Copilot. Same behaviour.
 
 ## The Bigger Picture
 
-This is really just version-controlling your team's AI behaviour. The `.md` file lives in git — it gets reviewed, it gets updated, it gets improved over time. When the team decides "we're moving to a new pattern", you update the file and everyone's AI follows.
+This is really just version-controlling your team's AI behaviour. The `.md` file lives in git, it gets reviewed, it gets updated, it gets improved over time. When the team decides "we're moving to a new pattern", you update the file and everyone's AI follows.
 
-It's not magic. It's just making the implicit explicit — the same way a coding standards doc works, except this one actually gets read. Because the AI reads it for you.
+It's not magic. It's just making the implicit explicit, the same way a coding standards doc works, except this one actually gets read. Because the AI reads it for you.
